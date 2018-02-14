@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block content %}
+  <form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <input type="file" name="myfile">
+    <button type="submit">Upload</button>
+  </form>
+
+   <?php
+            if (isset($_FILES['myfile'])) {
+                $myFile = $_FILES['myfile'];
+              
+                for ($i = 0; $i < 10; $i++) {
+                    ?>
+                        <p>File #<?= $i ?>:</p>
+                        <p> <img src="../../media/eye_image/1.jpg"> </p>
+                        
+                    <?php
+                }
+            }
+        ?>     
+
+  {% if uploaded_file_url %}
+    <p>File uploaded at: <a href="{{ uploaded_file_url }}">{{ uploaded_file_url }}</a></p>
+    <p> <img src="{{ uploaded_file_url }}"></p>
+
+  {% endif %}
+
+{% endblock %}
